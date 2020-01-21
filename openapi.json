@@ -1,0 +1,737 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API B1 Seller",
+    "description": "Especificação para realizações de requisições",
+    "contact": {
+      "email": "suporte@re9it.inf.br"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "/v1"
+    }
+  ],
+  "security": [
+    {
+      "application": [
+        "read",
+        "write"
+      ]
+    }
+  ],
+  "paths": {
+    "login/autenticateUser": {
+      "post": {
+        "tags": [
+          "Login"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/body_request_login"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/body_response_login"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Token invalido, inexistente ou expirado"
+          },
+          "500": {
+            "description": "Erro no servidor"
+          }
+        }
+      }
+    },
+    "/home/dataCampaigns": {
+      "get": {
+        "tags": [
+          "Home"
+        ],
+        "summary": "Recuperar uma conta de usuário pelo id",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "Token JWT no header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "format": "string"
+              }
+            },
+            "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdWJqZWN0LXN1YmplY3QiLCJhdWQiOlsiYXVkaWVuY2UxIiwiYXVkaWVuY2UyIl0sImlzcyI6InVybjovL2FwaWdlZS1lZGdlLUpXVC1wb2xpY3ktdGVzdCIsImV4cCI6MTU0NDA2NDgzNCwiaWF0IjoxNTQ0MDM2MDM0LCJqdGkiOiJmODU2NTkzNS1mODViLTRmNGQtYTcxNy1lNjcwNjhmNzUyOWIiLCJ1c2VybmFtZSI6ImNsZWlzb24ifQ.Oq22-GmBSexCk_SP2zX0e3sgHJrsYSNT_74RIK1Yxfo "
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/body_response_datacampaings"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Dados request enviados incorretos"
+          },
+          "401": {
+            "description": "Token invalido, inexistente ou expirado"
+          },
+          "404": {
+            "description": "Recurso {id} não encontrado"
+          },
+          "500": {
+            "description": "Erro no servidor"
+          }
+        }
+      }
+    },
+    "/home/dataCampaigns/:id": {
+      "get": {
+        "tags": [
+          "Home"
+        ],
+        "summary": "Recuperar campanha por ID",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "Token JWT no header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "format": "string"
+              }
+            },
+            "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdWJqZWN0LXN1YmplY3QiLCJhdWQiOlsiYXVkaWVuY2UxIiwiYXVkaWVuY2UyIl0sImlzcyI6InVybjovL2FwaWdlZS1lZGdlLUpXVC1wb2xpY3ktdGVzdCIsImV4cCI6MTU0NDA2NDgzNCwiaWF0IjoxNTQ0MDM2MDM0LCJqdGkiOiJmODU2NTkzNS1mODViLTRmNGQtYTcxNy1lNjcwNjhmNzUyOWIiLCJ1c2VybmFtZSI6ImNsZWlzb24ifQ.Oq22-GmBSexCk_SP2zX0e3sgHJrsYSNT_74RIK1Yxfo "
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/body_response_datacampaings_byid"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Dados request enviados incorretos"
+          },
+          "401": {
+            "description": "Token invalido, inexistente ou expirado"
+          },
+          "404": {
+            "description": "Recurso {id} não encontrado"
+          },
+          "500": {
+            "description": "Erro no servidor"
+          }
+        }
+      }
+    },
+    "/home/dataCategory": {
+      "get": {
+        "tags": [
+          "Home"
+        ],
+        "summary": "Retorna todas as categorias Cadastradas",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "Token JWT no header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "format": "string"
+              }
+            },
+            "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdWJqZWN0LXN1YmplY3QiLCJhdWQiOlsiYXVkaWVuY2UxIiwiYXVkaWVuY2UyIl0sImlzcyI6InVybjovL2FwaWdlZS1lZGdlLUpXVC1wb2xpY3ktdGVzdCIsImV4cCI6MTU0NDA2NDgzNCwiaWF0IjoxNTQ0MDM2MDM0LCJqdGkiOiJmODU2NTkzNS1mODViLTRmNGQtYTcxNy1lNjcwNjhmNzUyOWIiLCJ1c2VybmFtZSI6ImNsZWlzb24ifQ.Oq22-GmBSexCk_SP2zX0e3sgHJrsYSNT_74RIK1Yxfo "
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/body_response_campaigns"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Dados request enviados incorretos"
+          },
+          "401": {
+            "description": "Token invalido, inexistente ou expirado"
+          },
+          "404": {
+            "description": "Recurso {id} não encontrado"
+          },
+          "500": {
+            "description": "Erro no servidor"
+          }
+        }
+      }
+    },
+    "/home/dataCategory/:id": {
+      "get": {
+        "tags": [
+          "Home"
+        ],
+        "summary": "Retorna Categoria de um ID",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "Token JWT no header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "format": "string"
+              }
+            },
+            "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdWJqZWN0LXN1YmplY3QiLCJhdWQiOlsiYXVkaWVuY2UxIiwiYXVkaWVuY2UyIl0sImlzcyI6InVybjovL2FwaWdlZS1lZGdlLUpXVC1wb2xpY3ktdGVzdCIsImV4cCI6MTU0NDA2NDgzNCwiaWF0IjoxNTQ0MDM2MDM0LCJqdGkiOiJmODU2NTkzNS1mODViLTRmNGQtYTcxNy1lNjcwNjhmNzUyOWIiLCJ1c2VybmFtZSI6ImNsZWlzb24ifQ.Oq22-GmBSexCk_SP2zX0e3sgHJrsYSNT_74RIK1Yxfo "
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/body_response_campaigns"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Dados request enviados incorretos"
+          },
+          "401": {
+            "description": "Token invalido, inexistente ou expirado"
+          },
+          "404": {
+            "description": "Recurso {id} não encontrado"
+          },
+          "500": {
+            "description": "Erro no servidor"
+          }
+        }
+      }
+    },
+    "/home/dataLastPurchases": {
+      "get": {
+        "tags": [
+          "Home"
+        ],
+        "summary": "Últimas compras",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "Token JWT no header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "format": "string"
+              }
+            },
+            "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdWJqZWN0LXN1YmplY3QiLCJhdWQiOlsiYXVkaWVuY2UxIiwiYXVkaWVuY2UyIl0sImlzcyI6InVybjovL2FwaWdlZS1lZGdlLUpXVC1wb2xpY3ktdGVzdCIsImV4cCI6MTU0NDA2NDgzNCwiaWF0IjoxNTQ0MDM2MDM0LCJqdGkiOiJmODU2NTkzNS1mODViLTRmNGQtYTcxNy1lNjcwNjhmNzUyOWIiLCJ1c2VybmFtZSI6ImNsZWlzb24ifQ.Oq22-GmBSexCk_SP2zX0e3sgHJrsYSNT_74RIK1Yxfo "
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/body_response_purchases"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Dados request enviados incorretos"
+          },
+          "401": {
+            "description": "Token invalido, inexistente ou expirado"
+          },
+          "404": {
+            "description": "Recurso {id} não encontrado"
+          },
+          "500": {
+            "description": "Erro no servidor"
+          }
+        }
+      }
+    },
+    "/home/dataLastPurchases:id": {
+      "get": {
+        "tags": [
+          "Home"
+        ],
+        "summary": "Detalhe da compra",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "Token JWT no header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "format": "string"
+              }
+            },
+            "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdWJqZWN0LXN1YmplY3QiLCJhdWQiOlsiYXVkaWVuY2UxIiwiYXVkaWVuY2UyIl0sImlzcyI6InVybjovL2FwaWdlZS1lZGdlLUpXVC1wb2xpY3ktdGVzdCIsImV4cCI6MTU0NDA2NDgzNCwiaWF0IjoxNTQ0MDM2MDM0LCJqdGkiOiJmODU2NTkzNS1mODViLTRmNGQtYTcxNy1lNjcwNjhmNzUyOWIiLCJ1c2VybmFtZSI6ImNsZWlzb24ifQ.Oq22-GmBSexCk_SP2zX0e3sgHJrsYSNT_74RIK1Yxfo "
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/body_response_purchases_detail"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Dados request enviados incorretos"
+          },
+          "401": {
+            "description": "Token invalido, inexistente ou expirado"
+          },
+          "404": {
+            "description": "Recurso {id} não encontrado"
+          },
+          "500": {
+            "description": "Erro no servidor"
+          }
+        }
+      }
+    },
+    "/Product/": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Recuperar uma conta de usuário pelo id",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "Token JWT no header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "format": "string"
+              }
+            },
+            "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdWJqZWN0LXN1YmplY3QiLCJhdWQiOlsiYXVkaWVuY2UxIiwiYXVkaWVuY2UyIl0sImlzcyI6InVybjovL2FwaWdlZS1lZGdlLUpXVC1wb2xpY3ktdGVzdCIsImV4cCI6MTU0NDA2NDgzNCwiaWF0IjoxNTQ0MDM2MDM0LCJqdGkiOiJmODU2NTkzNS1mODViLTRmNGQtYTcxNy1lNjcwNjhmNzUyOWIiLCJ1c2VybmFtZSI6ImNsZWlzb24ifQ.Oq22-GmBSexCk_SP2zX0e3sgHJrsYSNT_74RIK1Yxfo "
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/body_responsxfdfd"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Dados request enviados incorretos"
+          },
+          "401": {
+            "description": "Token invalido, inexistente ou expirado"
+          },
+          "404": {
+            "description": "Recurso {id} não encontrado"
+          },
+          "500": {
+            "description": "Erro no servidor"
+          }
+        }
+      }
+    },
+    "/Outra/rota": {
+      "post": {
+        "tags": [
+          "OutraRota"
+        ],
+        "summary": "Recuperar uma conta de usuário pelo id",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "description": "Token JWT no header",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "format": "string"
+              }
+            },
+            "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdWJqZWN0LXN1YmplY3QiLCJhdWQiOlsiYXVkaWVuY2UxIiwiYXVkaWVuY2UyIl0sImlzcyI6InVybjovL2FwaWdlZS1lZGdlLUpXVC1wb2xpY3ktdGVzdCIsImV4cCI6MTU0NDA2NDgzNCwiaWF0IjoxNTQ0MDM2MDM0LCJqdGkiOiJmODU2NTkzNS1mODViLTRmNGQtYTcxNy1lNjcwNjhmNzUyOWIiLCJ1c2VybmFtZSI6ImNsZWlzb24ifQ.Oq22-GmBSexCk_SP2zX0e3sgHJrsYSNT_74RIK1Yxfo "
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/body_responsxfdfd_outra_rota"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Dados request enviados incorretos"
+          },
+          "401": {
+            "description": "Token invalido, inexistente ou expirado"
+          },
+          "404": {
+            "description": "Recurso {id} não encontrado"
+          },
+          "500": {
+            "description": "Erro no servidor"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "body_request_login": {
+        "required": [
+          "mail",
+          "pass"
+        ],
+        "type": "object",
+        "properties": {
+          "mail": {
+            "type": "string",
+            "format": "email",
+            "example": "admin@admin.com"
+          },
+          "pass": {
+            "type": "string",
+            "example": "senha12345"
+          }
+        }
+      },
+      "body_response_login": {
+        "required": [
+          "email",
+          "token"
+        ],
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdWJqZWN0LXN1YmplY3QiLCJhdWQiOlsiYXVkaWVuY2UxIiwiYXVkaWVuY2UyIl0sImlzcyI6InVybjovL2FwaWdlZS1lZGdlLUpXVC1wb2xpY3ktdGVzdCIsImV4cCI6MTU0NDA2NDgzNCwiaWF0IjoxNTQ0MDM2MDM0LCJqdGkiOiJmODU2NTkzNS1mODViLTRmNGQtYTcxNy1lNjcwNjhmNzUyOWIiLCJ1c2VybmFtZSI6ImNsZWlzb24ifQ.Oq22-GmBSexCk_SP2zX0e3sgHJrsYSNT_74RIK1Yxfo"
+          },
+          "account": {
+            "type": "string",
+            "example": "{\"id\":1,\"email\":\"admin@admin.com\",\"firstName\":\"First\",\"lastName\":\"Last\"}"
+          }
+        }
+      },
+      "body_response_datacampaings": {
+        "required": [
+          "dateBirth",
+          "email",
+          "firstName",
+          "gender",
+          "id",
+          "lastName",
+          "phoneNumber"
+        ],
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "array",
+            "example": [
+              {
+                "a1": "Capanha de Natal",
+                "a2": "camp1.png",
+                "aext": "$2a$08$5TTqzUhRezzNfNH4jn7HHuU3KFxmR7Pxxlx.pxxHAVPX2skcwqlYW"
+              },
+              {
+                "a1": "Campanha2",
+                "a2": "camp2.png",
+                "aext": "asdfjklgnsadifmasdgnf7yasdjgmfnyu"
+              },
+              {
+                "a1": "Campanha3",
+                "a2": "camp3.png",
+                "aext": "DASFASDFASD"
+              }
+            ]
+          }
+        }
+      },
+      "body_response_datacampaings_byid": {
+        "required": [
+          "dateBirth",
+          "email",
+          "firstName",
+          "gender",
+          "id",
+          "lastName",
+          "phoneNumber"
+        ],
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "array",
+            "example": [
+              {
+                "a1": "Lâmpada LED Bolinha Filamento 4W 2700K Bivolt",
+                "a2": "ilu_1_3.png",
+                "aextprod": "dasfgsdf4cq3f5243f5",
+                "a3": 20.9,
+                "aidca": ""
+              },
+              {
+                "a1": "Lâmpada de Filamento LED Bulbo 4W G45 E27 Âmbar",
+                "a2": "ilu_1_1.png",
+                "aextprod": "5432cfq",
+                "a3": 20.6,
+                "aidca": ""
+              },
+              {
+                "a1": "Lâmpada LED de Filamento de Carbono T45 Luz Amarela 40W 127V",
+                "a2": "ilu_1_2.png",
+                "aextprod": "fqfqwer324rf",
+                "a3": 15,
+                "aidca": ""
+              },
+              {
+                "a1": "Armário Escolar",
+                "a2": "org_1_1.png",
+                "aextprod": "435245",
+                "a3": 90.99,
+                "aidca": ""
+              }
+            ]
+          }
+        }
+      },
+      "body_response_purchases_detail": {
+        "required": [
+          "dateBirth",
+          "email",
+          "firstName",
+          "gender",
+          "id",
+          "lastName",
+          "phoneNumber"
+        ],
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "array",
+            "example": [
+              {
+                "a1": "Piso Pomes Caixa 2,00m² 45x45cm Bege Formigres ",
+                "a2": "piso_1_1.png",
+                "a3": 11.99,
+                "aidu": 1,
+                "aidc": 1,
+                "aextprod": "$2a$08$.vXq4Dme2xK/m8XeGK.fhePC06rl36z/lpQWx4onZRyo4ecyR3VqS"
+              }
+            ]
+          }
+        }
+      },
+      "body_response_purchases": {
+        "required": [
+          "dateBirth",
+          "email",
+          "firstName",
+          "gender",
+          "id",
+          "lastName",
+          "phoneNumber"
+        ],
+        "type": "object",
+        "properties": {
+          "msg": {
+            "type": "array",
+            "example": [
+              {
+                "a1": "xxxxxxx Piso Pomes Caixa 2,00m² 45x45cm Bege Formigres ",
+                "a2": "piso_1_1.png",
+                "a3": "11.99",
+                "aidu": "",
+                "aidc": "",
+                "aextprod": "$2a$08$.vXq4Dme2xK/m8XeGK.fhePC06rl36z/lpQWx4onZRyo4ecyR3VqS"
+              },
+              {
+                "a1": "Lâmpada de Filamento LED Bulbo 4W G45 E27 Âmbar",
+                "a2": "ilu_1_1.png",
+                "a3": "21.90",
+                "aidu": "",
+                "aidc": "",
+                "aextprod": "5432cfq"
+              },
+              {
+                "a1": "Aparador de Grama AP1000T - 79634/102 - TRAMONTINA",
+                "a2": "aparador_1_1.png",
+                "a3": "339.00",
+                "aidu": "",
+                "aidc": "",
+                "aextprod": "asdfa"
+              }
+            ]
+          }
+        }
+      },
+      "body_response_campaigns": {
+        "required": [
+          "dateBirth",
+          "email",
+          "firstName",
+          "gender",
+          "id",
+          "lastName",
+          "phoneNumber"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "example": 1
+          },
+          "msg": {
+            "type": "array",
+            "example": [
+              {
+                "a1": "Pisos",
+                "a2": "pisov2.png",
+                "a3": "pisov2.png",
+                "aidext": "a",
+                "color": null
+              },
+              {
+                "a1": "Tintas",
+                "a2": "tintav2.png",
+                "a3": "tinta1v2.png",
+                "aidext": "b",
+                "color": null
+              },
+              {
+                "a1": "Iluminação",
+                "a2": "ilu1v3.png",
+                "a3": "ilu1v3.png",
+                "aidext": "c",
+                "color": null
+              },
+              {
+                "a1": "Eletrodoméstico",
+                "a2": "eletro1v2.png",
+                "a3": "eletro1v2.png",
+                "aidext": "dsgfahgddsfghdagfhjgfssdfggdaf",
+                "color": null
+              },
+              {
+                "a1": "Construção",
+                "a2": "contrucao.png",
+                "a3": "contrucao.png",
+                "aidext": "afgfgdgfdgdfgdfgdf",
+                "color": null
+              },
+              {
+                "a1": "Ferramentas",
+                "a2": "ferrv3.png",
+                "a3": "ferrv3.png",
+                "aidext": "asdfgffsghdfghjbvcxnbmbvc",
+                "color": null
+              },
+              {
+                "a1": "Organização",
+                "a2": "org1.png",
+                "a3": "org1.png",
+                "aidext": "sfdgdfgsbvcnhgfsdbnsfd4352452523",
+                "color": null
+              },
+              {
+                "a1": "Jardim",
+                "a2": "jardimv2.png",
+                "a3": "jardim1v2.png",
+                "aidext": "çlkjhuyh78675t7hi",
+                "color": null
+              },
+              {
+                "a1": "Climatização",
+                "a2": "climatizacaov1.png",
+                "a3": "climatizacaov1.png",
+                "aidext": "dfasasdf",
+                "color": null
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}
